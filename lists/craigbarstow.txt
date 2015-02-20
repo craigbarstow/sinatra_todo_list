@@ -1,0 +1,8 @@
+butter
+flour
+sugar
+baking powder
+baking soda
+salt
+chocolate chips
+eggs

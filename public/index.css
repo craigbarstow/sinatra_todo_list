@@ -1,0 +1,106 @@
+html {
+  padding: none;
+}
+
+body {
+  background-color: #EBF0FA;
+  font-family: helvetica;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#header {
+  background-color: #ddd;
+  text-align: center;
+  padding: .1em;
+}
+
+#header h1 {
+  font-weight: lighter;
+  color: #E65C00;
+  font-size: 2.7em;
+}
+
+/***********************************
+list page specific styling
+***********************************/
+
+#list_page_content_wrapper {
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 3em;
+}
+
+#list_page_content_wrapper h1 {
+  text-align: center;
+  font-weight: lighter;
+}
+
+#list_table {
+  border: 1px solid #bbb;
+  border-radius: 2px;
+  margin: 0 auto;
+  min-width: 260px;
+  /*background-color:#bbb;*/
+}
+
+#list_table td {
+  font-size: 1.6em;
+  font-weight: 200;
+  border: 1px solid #bbb;
+  padding: .2em;
+  background-color: #EBF0FA;
+}
+
+#new_item_wrapper {
+  margin-top: 6em;
+  margin-bottom: 3em;
+}
+
+#new_item_wrapper h3 {
+  text-align: center;
+  font-weight: 400;
+}
+
+#new_item_wrapper form {
+  text-align: center;
+  font-weight: 300;
+}
+
+/***********************************
+login page specific styling
+***********************************/
+.form_page {
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.form_page  h3 {
+  margin-top: 4em;
+  font-weight: 300;
+  font-size: 1.5em;
+}
+
+.form_page div{
+  margin: 1em;
+}
+
+.form_page a {
+  text-decoration: none;
+}
+
+.form_page p {
+  margin: 0 auto;
+  margin-top: 4em;
+  color: #000;
+  padding: .4em;
+  background-color: rgba(221,221,221, .5);
+  border-radius: 3px;
+  width: 12em;
+}
+
+.form_page p:hover {
+  background-color: #ccc;
+}
