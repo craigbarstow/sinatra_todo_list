@@ -1,6 +1,6 @@
+require 'csv'
 require 'sinatra'
 require 'pry'
-require 'csv'
 
 enable :sessions
 
@@ -31,7 +31,7 @@ post '/new' do
   CSV.foreach('user_info.csv', headers: true) do |row|
     taken_usernames.push([row[0]])
   end
-  unless taken_usernames.include?([params['new_username']])
+  unless taken_usernames.include?([params['new_username']]) || params["new_password"] != params["confirm_password"]
     new_filename = "#{params[:new_username]}.txt"
     new_file = File.open("./lists/#{new_filename}", "w")
     new_file.close

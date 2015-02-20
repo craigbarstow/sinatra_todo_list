@@ -1,0 +1,15 @@
+Database layout:
+usernames used as ID
+  each has a one:
+    real name
+    password
+    lists directory
+
+
+    Lists directory
+      populated with lists
+      each has an id value
+
+      Lists
+        title
+        each has items
