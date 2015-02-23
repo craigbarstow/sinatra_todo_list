@@ -1,15 +1,17 @@
 <div class="form_page">
   <h3>Welcome. Please log in to access your lists</h3>
   <form action="/" method="post">
-    <div>
-      <label for="username">Username:</label>
-      <input type="text" required=1 id="username" name="username">
-    </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" required=1 id="password" name="password">
-    </div>
-    <input type="submit" id="submit_button">
+    <table>
+      <tr>
+        <td><label for="username">Username:</label></td>
+        <td><input type="text" required=1 id="username" name="username"></td>
+      </tr>
+      <tr>
+        <td><label for="password">Password:</label></td>
+        <td><input type="password" required=1 id="password" name="password"></td>
+      </tr>
+      <tr><td colspan="2"><input type="submit" id="submit_button"></td></tr>
+    </table>
   </form>
   <a href="/new"><p>Click Here to Create an Account</p></a>
 </div>
