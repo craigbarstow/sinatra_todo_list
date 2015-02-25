@@ -1,15 +1,10 @@
 <div id="list_page_content_wrapper">
-  <h1>This is a list</h1>
-  <% if list_items.length == 0 %>
-    <h1>Your list is currently empty</h1>
-  <% end %>
+  <h1>Your Lists</h1>
   <table id="list_table">
-    <% list_items.each do |item| %>
-      <tr><td><%= item %></td></tr>
-    <% end %>
+
   </table>
   <div id="new_item_wrapper">
-    <h3>Add a New Item: </h3>
+    <h3>Add a New List: </h3>
     <form action="/groceries" method="post">
       <input type="text" required=1 id="new_item_form" name="new_item">
       <input type="submit" id="submit_button">

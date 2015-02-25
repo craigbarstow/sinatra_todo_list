@@ -1,22 +1,25 @@
 require 'csv'
 require 'sinatra'
 require 'pry'
-require './files/sql_helper.rb'
+require './classes/db_mgr.rb'
+#require 'sinatra-flash'
+#!!!!!!!!!!!!!!!!! figure out how to use this
 
 enable :sessions
+
+db = Database_Manager.new 'todo_list_db'
+#sql_helper.add_users_from_csv('user_info.csv')
 
 get '/' do
   erb :login
 end
 
 post '/' do
-  user_info = {}
-  CSV.foreach('user_info.csv', headers: true) do |row|
-    user_info[row[0]] = {:password => row[1], :email=> row[2],:list_file => row[3]}
-  end
-  if user_info[params['username']][:password] == params['password']
-    session[:list_file] = user_info[params['username']][:list_file]
-    redirect '/groceries'
+  username = params['username']
+  password = params['password']
+  if db.validate_login?(username, password)
+    session[:username] = username
+    redirect '/lists'
   else
     redirect '/'
   end
@@ -27,32 +30,18 @@ get '/new' do
 end
 
 post '/new' do
-  taken_usernames = []
-  CSV.foreach('user_info.csv', headers: true) do |row|
-    taken_usernames.push([row[0]])
-  end
-  unless taken_usernames.include?([params['new_username']]) || params["new_password"] != params["confirm_password"]
-    new_filename = "#{params[:new_username]}.txt"
-    new_file = File.open("./lists/#{new_filename}", "w")
-    new_file.close
-    CSV.open('user_info.csv', "a") do |file|
-      file.puts([params['new_username'], params['new_password'], params['email'], new_filename])
-    end
+  if db.validate_new_user?(params['new_username'], params['email']) && params['new_password'] == params['confirm_password']
+    db.add_user(params['new_username'], params["new_password"], params["email"])
     redirect '/'
   end
   redirect '/new'
 end
 
 
-get '/groceries' do
-  list_items = File.readlines("lists/#{session[:list_file]}")
-  erb :index, locals: { list_items: list_items }
+get '/lists' do
+  erb :index, locals: { list_items: [] }
 end
 
-post '/groceries' do
-  File.open("lists/#{session[:list_file]}", "a") do |file|
-    #add exception handling here
-    file.puts(params['new_item'])
-  end
-  redirect '/groceries'
+post '/lists' do
+  #placeholder
 end
