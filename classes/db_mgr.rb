@@ -35,6 +35,20 @@ class DatabaseManager
     end
   end
 
+  def validate_user?(user_id)
+    if user_id == nil or user_id == ""
+      false
+    else
+      execute do |conn|
+        if conn.exec_params("SELECT * FROM users WHERE id = $1", [user_id]).ntuples == 1
+          true
+        else
+          false
+        end
+      end
+    end
+  end
+
   def get_list_titles(user_id)
     execute do |conn|
       conn.exec_params("SELECT * FROM lists WHERE user_id = $1", [user_id]);

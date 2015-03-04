@@ -11,6 +11,7 @@ function deleteItem(id) {
 }
 
 function deleteList(id) {
+  // $.delete("/items/10")
   $.post("/home.delete?list_id="+id, function(){
     //on success of post, remove table row with same id to keep consistent with sql data
     alert('stuff happened');

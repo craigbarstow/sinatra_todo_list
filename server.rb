@@ -36,14 +36,17 @@ post '/new' do
 end
 
 get '/home' do
-  #FIXME validate user here
-  lists_data = db.get_list_titles(session[:user_id])
-  title_id_array = []
-  lists_data.each do |row|
-    title_id_array.push({title: row['list_title'], id: row['id']})
+  if db.validate_user?(session[:user_id])
+    lists_data = db.get_list_titles(session[:user_id])
+    title_id_array = []
+    lists_data.each do |row|
+      title_id_array.push({title: row['list_title'], id: row['id']})
+    end
+    reset_current_list
+    erb :list_index, locals: { title_id_array: title_id_array }
+  else
+    redirect '/'
   end
-  reset_current_list
-  erb :list_index, locals: { title_id_array: title_id_array }
 end
 
 post '/home' do
@@ -60,18 +63,21 @@ post '/home.delete' do
 end
 
 get '/home/list' do
-  #FIXME validate user here
-  if session[:list_id] == nil
-    list_id = params['id']
-    session[:list_id] = list_id
+  if db.validate_user?(session[:user_id])
+    if session[:list_id] == nil
+      list_id = params['id']
+      session[:list_id] = list_id
+    end
+    list_title = db.get_list_title_from_id(session[:list_id])
+    items_array = []
+    list_items = db.get_list_items(session[:list_id], session[:user_id])
+    list_items.each do |row|
+      items_array.push({id: row['id'], item: row['item']})
+    end
+    erb :list, locals: {title: list_title, item_hashes: items_array}
+  else
+    redirect '/'
   end
-  list_title = db.get_list_title_from_id(session[:list_id])
-  items_array = []
-  list_items = db.get_list_items(session[:list_id], session[:user_id])
-  list_items.each do |row|
-    items_array.push({id: row['id'], item: row['item']})
-  end
-  erb :list, locals: {title: list_title, item_hashes: items_array}
 end
 
 post '/home/list' do
