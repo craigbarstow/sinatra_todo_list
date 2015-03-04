@@ -35,6 +35,11 @@ post '/new' do
   redirect '/new'
 end
 
+get '/logout' do
+  session.clear
+  redirect '/'
+end
+
 get '/home' do
   if db.validate_user?(session[:user_id])
     lists_data = db.get_list_titles(session[:user_id])
