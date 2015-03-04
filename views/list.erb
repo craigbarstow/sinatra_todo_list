@@ -1,0 +1,19 @@
+<div id="list_page_content_wrapper">
+  <a href="/home"><h3>< back</h3></a>
+  <h1><%= title %></h1>
+  <table id="list_table">
+    <% if item_hashes.length == 0 %>
+      <tr><td>You have no items in this list</td></tr>
+    <% end %>
+    <% item_hashes.each do |item_hash| %>
+      <tr id="<%= item_hash[:id] %>"><td class="item"><%= item_hash[:item] %></td><td class="delete" onclick="deleteItem(<%= item_hash[:id] %>)"><a href="#">delete</a></td></tr>
+    <% end %>
+  </table>
+  <div id="new_item_wrapper">
+    <h3>Add a New Item: </h3>
+    <form action="/home/list" method="post">
+      <input type="text" required="1" id="new_item" name="new_item">
+      <input type="submit" id="submit_button">
+    </form>
+  </div>
+</div>

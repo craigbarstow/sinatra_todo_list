@@ -1,0 +1,21 @@
+<div id="list_page_content_wrapper">
+  <h1>Your Lists</h1>
+  <table id="list_table">
+    <% if title_id_array.length == 0 %>
+      <tr><td>You have no lists</td></tr>
+    <% end %>
+    <% title_id_array.each do |list| %>
+      <tr id="<%= list[:id] %>">
+        <td><a href="/home/list?id=<%= list[:id] %>"><%= list[:title] %></a></td>
+        <td class="delete" onclick="deleteList(<%= list[:id] %>)"><a href="#">delete</a></td>
+      </tr>
+    <% end %>
+  </table>
+  <div id="new_item_wrapper">
+    <h3>Add a New List: </h3>
+    <form action="/home" method="post">
+      <input type="text" id="new_title" name="new_title">
+      <input type="submit" id="submit_button">
+    </form>
+  </div>
+</div>
